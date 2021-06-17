@@ -1,27 +1,49 @@
 <template>
   <div>
-    <!-- <h1>{{ count }}</h1> -->
-    <h2>{{ num }}</h2>
+    <h1>{{ count }}</h1>
+    <h2>{{ state.num }}</h2>
+    <h3>{{ num2 }}</h3>
+    <Test :title="title" :count="count2" @addCount="addCount" />
+    <ReactiveDemo />
   </div>
 </template>
 
 <script>
-import { reactive, ref, toRefs, h } from 'vue'
+import { reactive, ref, toRefs } from 'vue'
+import Test from './components/Test.vue'
+import ReactiveDemo from './components/ReactiveDemo.vue'
 export default {
   name: 'App',
-  setup(props, context){  // props
-  console.log(props);
+  components:{
+    Test,
+    ReactiveDemo
+  },
+  setup(props, context){
+    const { attrs, emit, slots } = context;
+    console.log(context)
+    const title = ref("我是title");
     const state = reactive({
-      count: 0
+      num: 1
     })
-    const num = ref(0);
-    console.log(num); // value取值
-
-    // return{
-    //   ...toRefs(state),
-    //   num
-    // }
-    return () => h('h1',[num.value])
+    const count = ref(0);
+    const state2 = reactive({
+      num2: 2
+    });
+    setTimeout(()=>{
+      title.value = "我是Vue3.0";
+    },3000);
+    const count2 = ref(2);
+    const addCount = (num) => {
+      count2.value += num;
+    }
+    return{
+      count,
+      state,
+      ...toRefs(state2),
+      title,
+      count2,
+      addCount
+    }
   }
 }
 </script>
