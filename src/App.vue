@@ -1,26 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <!-- <h1>{{ count }}</h1> -->
+    <h2>{{ num }}</h2>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { reactive, ref, toRefs, h } from 'vue'
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  setup(props, context){  // props
+  console.log(props);
+    const state = reactive({
+      count: 0
+    })
+    const num = ref(0);
+    console.log(num); // value取值
+
+    // return{
+    //   ...toRefs(state),
+    //   num
+    // }
+    return () => h('h1',[num.value])
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
