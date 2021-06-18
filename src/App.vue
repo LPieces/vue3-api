@@ -3,8 +3,12 @@
     <h1>{{ count }}</h1>
     <h2>{{ state.num }}</h2>
     <h3>{{ num2 }}</h3>
-    <Test :title="title" :count="count2" @addCount="addCount" />
+    <!-- <Test :title="title" :count="count2" @addCount="addCount" />
     <ReactiveDemo />
+    <ComputedDemo />
+    <readonlyDemo />
+    <watchEffectDemo /> -->
+    <watchDemo />
   </div>
 </template>
 
@@ -12,11 +16,19 @@
 import { reactive, ref, toRefs } from 'vue'
 import Test from './components/Test.vue'
 import ReactiveDemo from './components/ReactiveDemo.vue'
+import ComputedDemo from './components/ComputedDemo.vue'
+import readonlyDemo from './components/readonlyDemo.vue'
+import watchEffectDemo from './components/watchEffectDemo.vue'
+import watchDemo from './components/watchDemo.vue'
 export default {
   name: 'App',
   components:{
     Test,
-    ReactiveDemo
+    ReactiveDemo,
+    ComputedDemo,
+    readonlyDemo,
+    watchEffectDemo,
+    watchDemo
   },
   setup(props, context){
     const { attrs, emit, slots } = context;
